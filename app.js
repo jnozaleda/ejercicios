@@ -22,7 +22,7 @@
     const steps=frames.length
       ?`<div class="steps">${x.steps.map((t,n)=>`<div class="step ${frames[n]?'':'plain'}">${frames[n]?`<div class="step-img">${frames[n]}</div>`:''}<div class="step-txt"><b>${n+1}</b><span>${esc(t)}</span></div></div>`).join('')}</div>`
       :`<div class="steps">${x.steps.map((t,n)=>`<div class="step plain"><div class="step-txt"><b>${n+1}</b><span>${esc(t)}</span></div></div>`).join('')}</div>`;
-    return `${x.lead?`<p class="sheet-lead">${esc(x.lead)}</p>`:''}${x.art?`<div class="big">${x.art}</div>`:''}${x.feel?`<div class="feel"><i></i><span><b>Lo notarás en:</b> ${esc(x.feel)}</span></div>`:''}${steps}${x.ok?`<div class="tips"><div class="tip"><strong>Lo haces bien si…</strong>${esc(x.ok)}</div><div class="tip"><strong>Si cuesta demasiado</strong>${esc(x.easy)}</div></div>`:''}${x.note?`<div class="disclaimer"><strong>Importante:</strong> ${esc(x.note)}</div>`:''}`;
+    return `${x.lead?`<p class="sheet-lead">${esc(x.lead)}</p>`:''}${x.anim||''}${x.art?`<div class="big">${x.art}</div>`:''}${x.feel?`<div class="feel"><i></i><span><b>Lo notarás en:</b> ${esc(x.feel)}</span></div>`:''}${steps}${x.ok?`<div class="tips"><div class="tip"><strong>Lo haces bien si…</strong>${esc(x.ok)}</div><div class="tip"><strong>Si cuesta demasiado</strong>${esc(x.easy)}</div></div>`:''}${x.note?`<div class="disclaimer"><strong>Importante:</strong> ${esc(x.note)}</div>`:''}`;
   }
 
   window.startProgram=function(cfg){

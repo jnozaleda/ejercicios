@@ -133,7 +133,7 @@
   const label=(s)=>s===60?'1 min':`${s} s`;
   const HALF={zancada:'Otro lado',lateral:'Otro lado',flexor:'Otro lado',toalla:'Otro brazo'};
   const toGroups=(day)=>day.blocks.map((b,bi)=>({title:b.t,meta:`${b.m} min${b.note?' · '+b.note:''}`,items:b.items.map(([id,hint],i)=>({key:`${bi}-${i}`,id,dose:`${label(secsOf(b))}${hint?' · '+hint:''}`}))}));
-  const toSequence=(day)=>day.blocks.flatMap((b,bi)=>{const r=roundsOf(b),out=[];for(let round=1;round<=r;round++)b.items.forEach(([id,hint],i)=>out.push({key:`${bi}-${i}`,id,name:E[id].name,hint,steps:E[id].steps,art:figure(id),block:b.t,round,rounds:r,secs:secsOf(b),half:!!HALF[id],halfLabel:HALF[id]}));return out;});
+  const toSequence=(day)=>day.blocks.flatMap((b,bi)=>{const r=roundsOf(b),out=[];for(let round=1;round<=r;round++)b.items.forEach(([id,hint],i)=>out.push({key:`${bi}-${i}`,id,name:E[id].name,hint,steps:E[id].steps,art:animHtml(id,true),block:b.t,round,rounds:r,secs:secsOf(b),half:!!HALF[id],halfLabel:HALF[id]}));return out;});
   /* Carries over progress saved by the first version of this page ({'2026-10-5':{'0-0':true}}). */
   try{
     const old=JSON.parse(localStorage.getItem('rutina-15-v1'));
@@ -147,7 +147,7 @@
     key:'rutina-15-v2',file:'mi-rutina.json',brand:['15 ','min.'],tag:'Rutina en casa',
     note:['Sin material.','Mejor poco cada día, bien hecho, que mucho de vez en cuando.'],eyebrow:'Sin material · En casa',
     session(c){const day=WEEK[dayIdx()];startPlayer({title:day.title,sequence:toSequence(day),muted:c.st.muted,onDone:c.mark,onMute(m){c.st.muted=m;c.save();}});},
-    exercise(id){const e=E[id];return {name:e.name,thumb:figure(id),sheet:{feel:e.feel,frames:F[id].map(f=>f?figure(f):null),steps:e.steps,ok:e.ok,easy:e.easy}};},
+    exercise(id){const e=E[id];return {name:e.name,thumb:figure(id),sheet:{anim:animHtml(id),feel:e.feel,frames:F[id].map(f=>f?figure(f):null),steps:e.steps,ok:e.ok,easy:e.easy}};},
     today(c){
       const i=dayIdx(),day=WEEK[i],mon=new Date();mon.setDate(mon.getDate()-i);
       const moved=WEEK.filter((_,n)=>{const d=new Date(mon);d.setDate(mon.getDate()+n);return (c.st.checked[iso(d)]||[]).length>0;}).length;

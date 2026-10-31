@@ -66,6 +66,7 @@
       if(q('#pl-status').textContent!==status)q('#pl-status').textContent=status;
       q('#pl-status').className=`pl-status ${now==='prep'&&!pausedAt?'soft':''}`;
       q('#pl-pause').textContent=pausedAt?'Seguir':'Pausa';
+      el.classList.toggle('is-paused',!!pausedAt);
       q('#pl-total').textContent=`Quedan ${clock(Math.ceil(rest))}`;
       q('#pl-bar').style.width=`${(1-rest/total)*100}%`;
     }

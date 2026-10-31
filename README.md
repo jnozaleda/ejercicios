@@ -5,7 +5,7 @@ Miniweb interactiva, móvil y de escritorio, para acompañar las 12 primeras sem
 ## Publicar en GitHub Pages
 
 1. Crea un repositorio en GitHub, por ejemplo `volver-a-ti`.
-2. Sube a la **raíz** del repositorio `index.html`, `posparto.html`, `rutina.html`, `app.js`, `temporizador.js`, `compartido.css`, `datos-posparto.js` y `datos-rutina.js`.
+2. Sube a la **raíz** del repositorio `index.html`, `posparto.html`, `rutina.html`, `app.js`, `temporizador.js`, `animaciones.js`, `compartido.css`, `datos-posparto.js` y `datos-rutina.js`.
 3. En **Settings → Pages**, elige **Deploy from a branch**, selecciona `main` y la carpeta `/ (root)`. Guarda.
 4. GitHub mostrará el enlace de tu web, normalmente `https://TU_USUARIO.github.io/volver-a-ti/`.
 5. Comparte esa URL por WhatsApp.
@@ -15,7 +15,7 @@ No necesitas Node, instalación de dependencias, servidor, base de datos ni clav
 ## Estructura
 
 - `posparto.html` + `datos-posparto.js`: programa posparto, en `/posparto`.
-- `rutina.html` + `datos-rutina.js` + `temporizador.js`: rutina guiada de 15 minutos en casa, sin material, en `/rutina`.
+- `rutina.html` + `datos-rutina.js` + `temporizador.js` + `animaciones.js`: rutina guiada y animada de 15 minutos en casa, sin material, en `/rutina`.
 - `index.html`: redirige a `/posparto`, para que sigan funcionando los enlaces ya compartidos.
 - `app.js` + `compartido.css`: navegación, pantallas, ficha de ejercicio y progreso comunes a ambos.
 
