@@ -74,14 +74,17 @@
   function flexionUp(){return {h:P.flexion.h,l:P.flexion.l};}
   /* Images per step, in the same order as the steps. null = the step needs no drawing. */
   const F={gato:['gato1','gato2','gato3'],zancada:['zancada1','zancada2',null],cuclillas:['cuclillas1','cuclillas2',null],sentadilla:['sentadilla1','sentadilla2','sentadilla3'],puente:['puente1','puente3',null],gemelo:['gemelo1','gemelo2',null],tibial:['tibial1','tibial2',null],bicho:['bicho1','bicho2',null],cuatro:['cuatro1','cuatro2',null],lateral:['lateral1','lateral2',null],piernas:['piernas1','piernas2','piernas3'],inverso:['inverso1','inverso2',null],plancha:['plancha',null,null],flexion:['flexion1','flexion2','flexion3'],ytw:['ytw1','ytw2','ytw3'],flexor:['flexor1','flexor2',null],diamante:['manos','diamante2','diamante3'],pica:['pica1','pica2','pica3'],toalla:['toalla1','toalla2',null]};
+  let tipCount=0;
   function figure(id){
     const p=P[id];
     const spots=(p.s||[]).map(([x,y])=>`<circle cx="${x}" cy="${y}" r="14" fill="#e8814a" opacity=".6"/>`).join('');
     const limbs=p.l.map(d=>`<path d="${d}" fill="none" stroke="#3e735c" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>`).join('');
-    const arrows=(p.a||[]).map(d=>`<path d="${d}" fill="none" stroke="#b9531f" stroke-width="3.5" stroke-linecap="round" marker-end="url(#tip)"/>`).join('');
+    /* Each drawing needs its own marker: a shared id would break if the first drawing is hidden. */
+    const tip=`tip${++tipCount}`;
+    const arrows=(p.a||[]).map(d=>`<path d="${d}" fill="none" stroke="#b9531f" stroke-width="3.5" stroke-linecap="round" marker-end="url(#${tip})"/>`).join('');
     const head=p.h?`<circle cx="${p.h[0]}" cy="${p.h[1]}" r="12" fill="#3e735c"/>`:'';
     const floor=p.nf?'':'<path d="M8 110H192" stroke="#c6d6ca" stroke-width="3" stroke-linecap="round"/>';
-    return `<svg viewBox="0 0 200 118" aria-hidden="true"><defs><marker id="tip" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="3.4" markerHeight="3.4" orient="auto"><path d="M1 1L8 5L1 9" fill="none" stroke="#b9531f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>${floor}${limbs}${p.t?`<path d="${p.t}" fill="none" stroke="#b9794f" stroke-width="3" stroke-linecap="round"/>`:''}${head}${spots}${arrows}</svg>`;
+    return `<svg viewBox="0 0 200 118" aria-hidden="true"><defs><marker id="${tip}" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="3.4" markerHeight="3.4" orient="auto"><path d="M1 1L8 5L1 9" fill="none" stroke="#b9531f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>${floor}${limbs}${p.t?`<path d="${p.t}" fill="none" stroke="#b9794f" stroke-width="3" stroke-linecap="round"/>`:''}${head}${spots}${arrows}</svg>`;
   }
 
   /* No anatomy: names say what you do, "feel" points at a place you can touch. */
