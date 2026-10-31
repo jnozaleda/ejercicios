@@ -6,8 +6,8 @@
     zancada:{h:[88,20],l:['M92 36L100 70','M92 42L60 106','M92 42L132 26','M100 70L62 72L58 106','M100 70L150 88L178 106'],s:[[118,78]]},
     cuclillas:{h:[82,34],l:['M88 50L108 88','M88 56L72 76','M108 88L70 76L76 106H92'],s:[[106,90]]},
     sentadilla:{h:[84,22],l:['M88 36L112 72','M88 44L52 52','M112 72L72 74L78 106'],s:[[106,76],[90,74]]},
-    puente:{h:[28,92],l:['M44 98L108 66','M44 98H78','M108 66L140 64L142 106','M108 66L160 42'],s:[[106,72]]},
-    gemelo:{h:[94,14],l:['M96 30V68','M96 38L138 50','M96 68L98 92L112 106','M96 68L84 84L70 80','M138 8V106'],s:[[97,84]]},
+    puente:{h:[28,92],l:['M44 98L108 66','M44 98H78','M108 66L140 64L142 106'],s:[[106,72]]},
+    gemelo:{h:[94,14],l:['M96 30V68','M96 38L138 50','M96 68L98 92L112 106','M138 8V106'],s:[[97,84]]},
     tibial:{h:[60,16],l:['M46 8V106','M58 32L64 66','M64 66L108 100L126 88'],s:[[92,84]]},
     bicho:{h:[30,88],l:['M46 96H110','M52 94L52 56','M52 94L24 64','M110 96L132 62L164 62','M110 96L168 94'],s:[[80,88]]},
     cuatro:{h:[42,36],l:['M56 54H130','M60 56V106','M60 54L18 52','M130 56V106H150','M130 54L180 52'],s:[[94,48]]},
@@ -39,8 +39,8 @@
     puente1:{h:[28,92],l:['M44 98H108','M108 98L134 68L146 106']},
     puente2:{h:[28,92],l:['M44 98H108','M108 98L134 68L146 106','M108 98L150 44']},
     puente3:{...P.puente,a:['M88 54V38']},
-    gemelo1:{h:[94,14],l:['M96 30V68','M96 38L138 50','M96 68V104H110','M96 68L84 84L70 80',wallR]},
-    gemelo2:{...P.gemelo,a:['M66 50V30']},
+    gemelo1:{h:[94,14],l:['M96 30V68','M96 38L138 50','M96 68V104H110',wallR]},
+    gemelo2:{...P.gemelo,a:['M72 66V46']},
     tibial1:{h:[60,16],l:[wall,'M58 32L64 66','M64 66L108 100L130 104']},
     tibial2:{...P.tibial,a:['M150 100V78']},
     bicho1:{h:[30,88],l:['M46 96H110','M52 94V56','M110 96L132 62L164 62']},
@@ -73,7 +73,7 @@
   });
   function flexionUp(){return {h:P.flexion.h,l:P.flexion.l};}
   /* Images per step, in the same order as the steps. null = the step needs no drawing. */
-  const F={gato:['gato1','gato2','gato3'],zancada:['zancada1','zancada2',null],cuclillas:['cuclillas1','cuclillas2',null],sentadilla:['sentadilla1','sentadilla2','sentadilla3'],puente:['puente1','puente2','puente3'],gemelo:['gemelo1','gemelo2',null],tibial:['tibial1','tibial2',null],bicho:['bicho1','bicho2',null],cuatro:['cuatro1','cuatro2',null],lateral:['lateral1','lateral2',null],piernas:['piernas1','piernas2','piernas3'],inverso:['inverso1','inverso2',null],plancha:['plancha',null,null],flexion:['flexion1','flexion2','flexion3'],ytw:['ytw1','ytw2','ytw3'],flexor:['flexor1','flexor2',null],diamante:['manos','diamante2','diamante3'],pica:['pica1','pica2','pica3'],toalla:['toalla1','toalla2',null]};
+  const F={gato:['gato1','gato2','gato3'],zancada:['zancada1','zancada2',null],cuclillas:['cuclillas1','cuclillas2',null],sentadilla:['sentadilla1','sentadilla2','sentadilla3'],puente:['puente1','puente3',null],gemelo:['gemelo1','gemelo2',null],tibial:['tibial1','tibial2',null],bicho:['bicho1','bicho2',null],cuatro:['cuatro1','cuatro2',null],lateral:['lateral1','lateral2',null],piernas:['piernas1','piernas2','piernas3'],inverso:['inverso1','inverso2',null],plancha:['plancha',null,null],flexion:['flexion1','flexion2','flexion3'],ytw:['ytw1','ytw2','ytw3'],flexor:['flexor1','flexor2',null],diamante:['manos','diamante2','diamante3'],pica:['pica1','pica2','pica3'],toalla:['toalla1','toalla2',null]};
   function figure(id){
     const p=P[id];
     const spots=(p.s||[]).map(([x,y])=>`<circle cx="${x}" cy="${y}" r="14" fill="#e8814a" opacity=".6"/>`).join('');
@@ -87,11 +87,11 @@
   /* No anatomy: names say what you do, "feel" points at a place you can touch. */
   const E={
     gato:{name:'Arquear y redondear la espalda',feel:'Toda la espalda, como si se soltara.',steps:['Ponte a cuatro patas.','Coge aire y deja caer la barriga mirando un poco hacia arriba.','Suelta el aire y redondea la espalda como un gato enfadado.'],ok:'Se mueve despacio, sin tirones.',easy:'Haz el movimiento más pequeño.'},
-    zancada:{name:'Paso largo y giro',feel:'La parte delantera de la cadera de la pierna de atrás.',steps:['Da un paso largo y apoya las manos en el suelo.','Sube un brazo hacia el techo y mira tu mano.','Bájalo y cambia de lado cada 30 segundos.'],ok:'Notas que estira, pero no duele.',easy:'Apoya la rodilla de atrás en el suelo.'},
+    zancada:{name:'Paso largo y giro',feel:'La parte delantera de la cadera de la pierna de atrás.',steps:['Da un paso largo y apoya las manos en el suelo.','Sube un brazo hacia el techo y mira tu mano.','Bájalo y cambia de lado cuando suene el aviso.'],ok:'Notas que estira, pero no duele.',easy:'Apoya la rodilla de atrás en el suelo.'},
     cuclillas:{name:'Quedarte en cuclillas',feel:'Caderas y tobillos.',steps:['Pies algo más abiertos que los hombros.','Baja hasta donde puedas y quédate ahí.','Respira tranquilo y empuja las rodillas hacia fuera con los codos.'],ok:'Los talones siguen en el suelo.',easy:'Agárrate al marco de una puerta.'},
     sentadilla:{name:'Sentarte en una silla invisible',feel:'Parte delantera de los muslos y culo.',steps:['Pies a la anchura de los hombros.','Baja en 3 segundos, como si fueras a sentarte.','Sube empujando el suelo con todo el pie.'],ok:'Las rodillas apuntan hacia los dedos de los pies.',easy:'Siéntate de verdad en una silla y levántate.'},
-    puente:{name:'Subir el culo desde el suelo',feel:'El culo. Si lo notas en la espalda, sube menos.',steps:['Túmbate boca arriba con las rodillas dobladas.','Estira una pierna hacia arriba.','Empuja con el otro pie y sube el culo hasta formar una línea recta.'],ok:'La cadera sube recta, sin torcerse.',easy:'Hazlo con los dos pies en el suelo.'},
-    gemelo:{name:'Ponerte de puntillas a un pie',feel:'La parte de atrás de la pierna, debajo de la rodilla.',steps:['Apoya una mano en la pared.','Sube de puntillas sobre un pie, lo más alto posible.','Baja despacio, en 2 o 3 segundos.'],ok:'Subes hasta arriba del todo cada vez.',easy:'Hazlo con los dos pies.'},
+    puente:{name:'Subir el culo desde el suelo',feel:'El culo. Si lo notas en la espalda, sube menos.',steps:['Túmbate boca arriba con las rodillas dobladas y los pies apoyados.','Empuja con los dos pies y sube el culo hasta formar una línea recta.','Baja despacio y repite.'],ok:'La cadera sube recta, sin torcerse.',easy:'Sube menos el culo.'},
+    gemelo:{name:'Ponerte de puntillas',feel:'La parte de atrás de la pierna, debajo de la rodilla.',steps:['Apoya una mano en la pared.','Sube de puntillas, lo más alto posible.','Baja despacio, en 2 o 3 segundos.'],ok:'Subes hasta arriba del todo cada vez.',easy:'Sube menos o apóyate con las dos manos.'},
     tibial:{name:'Levantar las puntas de los pies',feel:'La parte delantera de la pierna, junto a la espinilla.',steps:['Apoya la espalda en la pared, con los pies un poco adelantados.','Levanta las puntas de los pies hacia ti.','Bájalas sin llegar a tocar el suelo con fuerza.'],ok:'Solo se mueven los pies.',easy:'Acerca los pies a la pared.'},
     bicho:{name:'Boca arriba, brazo y pierna contrarios',feel:'La barriga, como si te fueran a dar un toque.',steps:['Boca arriba, con los brazos hacia el techo y las rodillas dobladas en el aire.','Baja un brazo y la pierna contraria, sin tocar el suelo.','Vuelve y cambia de lado.'],ok:'La parte baja de la espalda no se despega del suelo.',easy:'Baja solo la pierna.'},
     cuatro:{name:'A cuatro patas, brazo y pierna contrarios',feel:'Barriga y culo. La espalda no debería molestar.',steps:['Ponte a cuatro patas.','Estira un brazo y la pierna contraria hasta formar una línea.','Aguanta 2 segundos y cambia.'],ok:'Podrías llevar un vaso de agua en la espalda.',easy:'Mueve solo la pierna.'},
@@ -101,23 +101,23 @@
     plancha:{name:'Tabla apretando barriga y culo',feel:'Toda la barriga, como si la cerraras.',steps:['Apóyate en antebrazos y puntas de los pies.','Aprieta el culo y mete un poco la barriga.','Empuja el suelo y separa bien los hombros.'],ok:'El cuerpo forma una línea, sin que la cadera se hunda.',easy:'Apoya las rodillas.'},
     flexion:{name:'Flexiones',feel:'El pecho y la parte de atrás de los brazos.',steps:['Manos bajo los hombros y cuerpo recto.','Baja en 2 o 3 segundos, hasta casi tocar el suelo.','Empuja hasta estirar los brazos.'],ok:'El cuerpo baja entero, como una tabla.',easy:'Apoya las rodillas o las manos en la mesa.'},
     ytw:{name:'Boca abajo, dibujar Y, T y W con los brazos',feel:'Entre los omóplatos, los huesos planos de la espalda.',steps:['Boca abajo y mirando al suelo, levanta un poco los brazos en forma de Y. El dibujo te ve desde arriba.','Sin tocar el suelo, ábrelos en forma de T.','Dobla los codos en forma de W y junta los omóplatos, como si sujetaras un lápiz entre ellos.'],ok:'El cuello sigue relajado.',easy:'Sube menos los brazos.'},
-    flexor:{name:'Estirar la cadera de rodillas',feel:'La parte delantera de la cadera, donde se dobla la pierna.',steps:['Ponte con una rodilla en el suelo y el otro pie delante.','Aprieta el culo y lleva el cuerpo un poco hacia delante.','Aguanta 30 segundos y cambia de lado.'],ok:'Notas que estira por delante, no en la espalda.',easy:'Pon una toalla bajo la rodilla.'},
+    flexor:{name:'Estirar la cadera de rodillas',feel:'La parte delantera de la cadera, donde se dobla la pierna.',steps:['Ponte con una rodilla en el suelo y el otro pie delante.','Aprieta el culo y lleva el cuerpo un poco hacia delante.','Aguanta y cambia de lado cuando suene el aviso.'],ok:'Notas que estira por delante, no en la espalda.',easy:'Pon una toalla bajo la rodilla.'},
     diamante:{name:'Flexiones con las manos juntas',feel:'La parte de atrás del brazo, la que cuelga si no la trabajas.',steps:['Junta las manos bajo el pecho, formando un rombo con los dedos.','Baja despacio, con los codos pegados al cuerpo.','Empuja hasta estirar los brazos.'],ok:'Deberías poder hacer 2 más al terminar.',easy:'Apoya las rodillas.'},
     pica:{name:'Flexiones con el culo hacia arriba',feel:'Los hombros y la parte de atrás del brazo.',steps:['Colócate como una V al revés, con el culo arriba.','Dobla los codos y acerca la cabeza al suelo.','Empuja para volver arriba.'],ok:'La cabeza va hacia el suelo, no hacia delante.',easy:'Acerca más los pies a las manos.'},
     toalla:{name:'Subir una toalla contra tu pierna',feel:'La parte de delante del brazo, la del «músculo» clásico.',steps:['Sentado o de pie, pasa una toalla bajo un pie y coge los dos extremos con una mano.','Sube la mano doblando el codo, mientras la pierna empuja hacia abajo.','Baja en 3 segundos, sin dejar de hacer fuerza.'],ok:'El codo se queda pegado al cuerpo.',easy:'Empuja menos con la pierna.'}
   };
 
-  const warm={t:'Despertar el cuerpo',m:3,items:[['gato','1 minuto'],['zancada','1 minuto'],['cuclillas','1 minuto']]};
-  const legs=(r)=>({t:'Piernas',m:r===2?4:2,note:r===2?'2 vueltas':'1 vuelta',items:[['sentadilla','10 veces'],['puente','8 por lado'],['gemelo','10 por lado'],['tibial','15 veces']]});
-  const cool={t:'Para terminar',m:1,items:[['flexor','30 segundos por lado']]};
+  const warm={t:'Despertar el cuerpo',m:3,items:[['gato',''],['zancada','Cambia de lado con el aviso'],['cuclillas','']]};
+  const legs=(r)=>({t:'Piernas',m:r===2?4:2,note:r===2?'2 vueltas':'1 vuelta',items:[['sentadilla','Unas 6, lentas'],['puente','Unas 6, con los dos pies'],['gemelo','Unas 8, con los dos pies'],['tibial','Unas 12']]});
+  const cool={t:'Para terminar',m:1,items:[['flexor','Cambia de lado con el aviso']]};
   const A={key:'abs',label:'Barriga',title:'Barriga fuerte',lead:'Hoy trabajas la barriga y la espalda baja. Para que se vean los abdominales, además, cuenta sobre todo la comida.',min:15,blocks:[warm,legs(1),
-    {t:'Barriga y espalda',m:4,note:'2 vueltas',items:[['bicho','8 por lado'],['cuatro','8 por lado'],['lateral','20 segundos por lado']]},
-    {t:'Abdominales',m:3,focus:true,note:'2 vueltas',items:[['piernas','8 veces'],['inverso','10 veces'],['plancha','30 segundos']]},
-    {t:'Pecho y espalda alta',m:2,note:'1 vuelta',items:[['flexion','las que salgan bien'],['ytw','5 de cada letra']]},cool]};
+    {t:'Barriga y espalda',m:4,note:'2 vueltas',items:[['bicho','Alterna los lados'],['cuatro','Alterna los lados'],['lateral','Cambia de lado con el aviso']]},
+    {t:'Abdominales',m:3,focus:true,note:'2 vueltas',items:[['piernas','Unas 6, lentas'],['inverso','Unas 8'],['plancha','Aguanta']]},
+    {t:'Pecho y espalda alta',m:2,note:'1 vuelta',items:[['flexion','Las que salgan bien'],['ytw','Unas 5 de cada letra']]},cool]};
   const B={key:'arms',label:'Brazos',title:'Brazos fuertes',lead:'Hoy el trabajo principal son los brazos. Mejor pocas repeticiones bien hechas que muchas a toda prisa.',min:15,blocks:[warm,legs(1),
-    {t:'Brazos',m:6,focus:true,note:'2 vueltas',items:[['diamante','hasta que te queden 2 en reserva'],['pica','6 a 10 veces'],['toalla','8 a 12 por brazo']]},
-    {t:'Barriga y espalda',m:2,note:'1 vuelta',items:[['bicho','8 por lado'],['cuatro','8 por lado'],['lateral','20 segundos por lado']]},
-    {t:'Espalda alta',m:1,items:[['ytw','5 de cada letra']]},cool]};
+    {t:'Brazos',m:6,focus:true,note:'2 vueltas',items:[['diamante','Las que salgan bien'],['pica','Las que salgan bien'],['toalla','Cambia de brazo con el aviso']]},
+    {t:'Barriga y espalda',m:2,note:'1 vuelta',items:[['bicho','Alterna los lados'],['cuatro','Alterna los lados'],['lateral','Cambia de lado con el aviso']]},
+    {t:'Espalda alta',m:1,items:[['ytw','Unas 5 de cada letra']]},cool]};
   const C={key:'easy',label:'Suave',title:'Día suave',lead:'Hoy solo moverte un poco. Descansar también forma parte de ponerse fuerte.',min:8,blocks:[warm,legs(2),cool]};
   const WEEK=[A,B,A,B,A,B,C];
   const LETTERS=['L','M','X','J','V','S','D'];
@@ -127,7 +127,13 @@
   const NAMES=['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'];
   const iso=(d)=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
   const bar=(day)=>`<div class="bar-wrap"><div class="bar" aria-hidden="true">${day.blocks.map(b=>`<i class="${b.focus?'focus':''}" style="flex:${b.m}"></i>`).join('')}</div><div class="bar-note">Cómo se reparten los ${day.min} minutos. En verde oscuro, lo importante.</div></div>`;
-  const toGroups=(day)=>day.blocks.map((b,bi)=>({title:b.t,meta:`${b.m} min${b.note?' · '+b.note:''}`,items:b.items.map(([id,dose],i)=>({key:`${bi}-${i}`,id,dose}))}));
+  /* Each exercise's time is its block's minutes shared out among its turns, so a session always adds up. */
+  const roundsOf=(b)=>parseInt(b.note,10)||1;
+  const secsOf=(b)=>b.m*60/(b.items.length*roundsOf(b));
+  const label=(s)=>s===60?'1 min':`${s} s`;
+  const HALF={zancada:'Otro lado',lateral:'Otro lado',flexor:'Otro lado',toalla:'Otro brazo'};
+  const toGroups=(day)=>day.blocks.map((b,bi)=>({title:b.t,meta:`${b.m} min${b.note?' · '+b.note:''}`,items:b.items.map(([id,hint],i)=>({key:`${bi}-${i}`,id,dose:`${label(secsOf(b))}${hint?' · '+hint:''}`}))}));
+  const toSequence=(day)=>day.blocks.flatMap((b,bi)=>{const r=roundsOf(b),out=[];for(let round=1;round<=r;round++)b.items.forEach(([id,hint],i)=>out.push({key:`${bi}-${i}`,id,name:E[id].name,hint,steps:E[id].steps,art:figure(id),block:b.t,round,rounds:r,secs:secsOf(b),half:!!HALF[id],halfLabel:HALF[id]}));return out;});
   /* Carries over progress saved by the first version of this page ({'2026-10-5':{'0-0':true}}). */
   try{
     const old=JSON.parse(localStorage.getItem('rutina-15-v1'));
@@ -140,13 +146,14 @@
   startProgram({
     key:'rutina-15-v2',file:'mi-rutina.json',brand:['15 ','min.'],tag:'Rutina en casa',
     note:['Sin material.','Mejor poco cada día, bien hecho, que mucho de vez en cuando.'],eyebrow:'Sin material · En casa',
+    session(c){const day=WEEK[dayIdx()];startPlayer({title:day.title,sequence:toSequence(day),muted:c.st.muted,onDone:c.mark,onMute(m){c.st.muted=m;c.save();}});},
     exercise(id){const e=E[id];return {name:e.name,thumb:figure(id),sheet:{feel:e.feel,frames:F[id].map(f=>f?figure(f):null),steps:e.steps,ok:e.ok,easy:e.easy}};},
     today(c){
       const i=dayIdx(),day=WEEK[i],mon=new Date();mon.setDate(mon.getDate()-i);
       const moved=WEEK.filter((_,n)=>{const d=new Date(mon);d.setDate(mon.getDate()+n);return (c.st.checked[iso(d)]||[]).length>0;}).length;
       return {pill:`${NAMES[i].toUpperCase()} · ${day.min} MINUTOS`,title:day.title,lead:day.lead,art:`<span class="fig">${figure(day.key==='arms'?'flexion':day.key==='abs'?'plancha':'cuclillas')}</span>`,
         stats:(done,total)=>[{v:day.min,l:'Minutos de hoy'},{v:moved,of:7,l:'Días con actividad esta semana'},{v:done,of:total,l:'Ejercicios marcados hoy'}],
-        heading:'Hoy, paso a paso',sub:'Toca un ejercicio para ver cómo se hace',cardTitle:'Tu sesión',cardLead:'Marca cada ejercicio al terminarlo.',bar:bar(day),groups:toGroups(day),
+        heading:'Hoy, paso a paso',sub:'Toca un ejercicio para ver cómo se hace',cardTitle:'Tu sesión',cardLead:'Con Empezar, la sesión te guía y marca cada ejercicio. También puedes ir a tu aire y marcarlos a mano.',bar:bar(day),start:`Empezar · ${day.min} minutos`,groups:toGroups(day),
         after:`<div style="height:6px"></div><div class="notice">${c.svgIcon('info')}<div><strong>Molestia sí, dolor no.</strong> Si aparece un dolor agudo, que baja por la pierna o que va a más, para y consulta con un profesional. <button data-page="care" style="border:0;padding:0;background:none;color:var(--teal-dark);text-decoration:underline;font-weight:700">Ver cuándo parar</button>.</div></div>`};
     },
     plan(c){
@@ -161,7 +168,7 @@
         items:(f==='all'?ids:todays).map(id=>({key:id,id,dose:E[id].feel}))};
     },
     care(){return {top:`<div class="eyebrow">El cuidado primero</div><h1 class="page-h">Escucha las<br>señales de tu cuerpo.</h1><p class="lead">Las agujetas y el cansancio muscular son normales. El dolor no lo es.</p>
-      <div class="row-2" style="margin-top:24px"><div class="card"><div class="card-hdr"><div><h3>Cómo avanzar</h3><p>Cada 2 semanas, cambia solo una cosa.</p></div></div><div class="safety-list">${['Termina sintiendo que podrías hacer 2 o 3 repeticiones más.','Baja más lento antes de hacer más repeticiones.','Si vas justo de tiempo, haz menos, pero sin correr.','Empieza las posturas profundas hasta donde te resulte cómodo.'].map(t=>`<div class="safety-item"><span class="bul"></span><span>${t}</span></div>`).join('')}</div></div>
+      <div class="row-2" style="margin-top:24px"><div class="card"><div class="card-hdr"><div><h3>Cómo avanzar</h3><p>Cada 2 semanas, cambia solo una cosa.</p></div></div><div class="safety-list">${['Termina sintiendo que podrías hacer 2 o 3 repeticiones más.','En el mismo tiempo, baja más lento o haz alguna más con buena técnica.','Las repeticiones son orientativas: mejor pocas bien hechas que correr.','Empieza las posturas profundas hasta donde te resulte cómodo.'].map(t=>`<div class="safety-item"><span class="bul"></span><span>${t}</span></div>`).join('')}</div></div>
       <div class="urgent"><span class="tag peach">CUÁNDO PARAR</span><h3 style="margin-top:14px">Para y consulta si notas</h3><ul><li>Dolor agudo o repentino.</li><li>Dolor que baja por la pierna.</li><li>Dolor que va a más de un día a otro.</li><li>Mareo o dolor en el pecho.</li></ul><p style="color:#955d59;font-size:12px;line-height:1.6;margin-bottom:0">Si tienes una lesión o una enfermedad, consulta antes a un profesional. En España, ante una emergencia, llama al 112.</p></div></div>
       <div class="section-title"><h2>Lo que más ayuda</h2></div><div class="card pad"><div class="week-list"><div><strong>Abdominales visibles</strong><p class="tiny">Dependen sobre todo de tener poca grasa encima, es decir, de la comida. Hacer abdominales no quema la grasa de esa zona.</p></div><div><strong>Comer proteína</strong><p class="tiny">Ayuda a conservar el músculo si estás perdiendo peso.</p></div><div><strong>Caminar</strong><p class="tiny">Moverte a diario gasta más que añadir más abdominales.</p></div><div><strong>Dormir</strong><p class="tiny">Dormir poco da más hambre y empeora la recuperación.</p></div></div></div>`,
       bottom:`<p class="tiny" style="margin:18px 0 0">Guía orientativa y general. No sustituye la valoración de un profesional sanitario.</p>`};}

@@ -42,14 +42,15 @@
         :`<div class="open static">${body}</div>`}</div>${ex?`<div class="detail">${opened?sheet(ex.sheet):''}</div>`:''}</article>`;
     }
     const group=(g,scope,checkable)=>`<section class="group">${g.title?`<div class="group-hdr"><h3>${esc(g.title)}</h3><span>${esc(g.meta||'')}</span></div>`:''}${g.items.map(it=>row(it,scope,checkable)).join('')}</section>`;
-    const ctx={st,esc,svgIcon,group,today,ui};
+    const mark=(k)=>{const s=new Set(doneToday());s.add(k);st.checked[today()]=[...s];save();render();};
+    const ctx={st,esc,svgIcon,group,today,ui,mark,save};
 
     const shell=(main)=>`<aside class="sidebar"><div class="logo-wrap"><div class="logo">${esc(cfg.brand[0])}<span>${esc(cfg.brand[1])}</span></div><div class="brand-tag">${esc(cfg.tag)}</div></div><nav class="nav" aria-label="Navegación principal">${Object.entries(LABELS).map(([k,v])=>`<button class="nav-btn ${ui.page===k?'active':''}" data-page="${k}">${svgIcon(k)} ${v}</button>`).join('')}</nav><div class="side-note"><strong>${esc(cfg.note[0])}</strong> ${esc(cfg.note[1])}</div><div class="side-bottom">Tus datos no salen de este dispositivo.</div></aside><main class="main"><div class="topbar"><div class="eyebrow">${esc(cfg.eyebrow)}</div><div class="date-widget">${svgIcon('calendar')} <span>${esc(new Date().toLocaleDateString('es-ES',{day:'numeric',month:'short',year:'numeric'}))}</span></div></div>${main}</main><nav class="bottomnav" aria-label="Navegación móvil">${Object.entries(LABELS).map(([k,v])=>`<button class="${ui.page===k?'active':''}" data-page="${k}" ${ui.page===k?'aria-current="page"':''}>${svgIcon(k)}<span>${v}</span></button>`).join('')}</nav>`;
 
     function home(){
       const t=cfg.today(ctx),ids=t.groups.flatMap(g=>g.items.map(i=>i.key)),done=ids.filter(i=>doneToday().includes(i)).length,pct=ids.length?Math.round(done/ids.length*100):0;
       const stats=t.stats(done,ids.length);
-      return `<section class="hero"><div class="hero-content"><div class="pill"><i class="dot"></i> ${esc(t.pill)}</div><h1>${t.title}</h1><p>${esc(t.lead)}</p></div><div class="hero-art">${t.art}</div></section>
+      return `<section class="hero"><div class="hero-content"><div class="pill"><i class="dot"></i> ${esc(t.pill)}</div><h1>${t.title}</h1><p>${esc(t.lead)}</p>${t.start?`<button class="btn start" data-session>${esc(t.start)}</button>`:''}</div><div class="hero-art">${t.art}</div></section>
       <div class="mini-grid">${stats.map(s=>`<div class="card stat"><div class="value">${s.v}${s.of!==undefined?`<span class="of">/${s.of}</span>`:''}</div><div class="label">${esc(s.l)}</div></div>`).join('')}</div>
       <div class="section-title"><h2>${esc(t.heading)}</h2><span>${esc(t.sub)}</span></div>
       <div class="card today-card"><div class="card-hdr"><div><h3>${esc(t.cardTitle)}</h3><p>${esc(t.cardLead)}</p></div><div class="progress-ring" style="--p:${pct}"><span>${pct}%</span></div></div>${t.bar||''}</div>
@@ -81,7 +82,8 @@
 
     root.addEventListener('click',e=>{
       const b=e.target.closest('button');if(!b)return;const d=b.dataset;
-      if(d.page){ui.page=d.page;render();window.scrollTo(0,0);}
+      if(d.session!==undefined){cfg.session(ctx);}
+      else if(d.page){ui.page=d.page;render();window.scrollTo(0,0);}
       else if(d.check!==undefined){const a=new Set(doneToday());a.has(d.check)?a.delete(d.check):a.add(d.check);st.checked[today()]=[...a];save();render();}
       else if(d.open!==undefined){ui.open.has(d.open)?ui.open.delete(d.open):ui.open.add(d.open);render();}
       else if(d.chip!==undefined){ui.chip=d.chip;render();}
